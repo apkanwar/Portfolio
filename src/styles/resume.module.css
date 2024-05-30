@@ -1,0 +1,94 @@
+
+@media screen and (max-width: 1280px) {
+    .left-sidenav{
+        display: none;
+        visibility: visible;
+        width: 40%;
+        height: auto;
+    }
+    .content{
+        margin-left: 2%;
+        float: none;
+    }
+}
+@media screen and (max-width: 700px) {
+    .left-sidenav{
+        visibility: hidden;
+        display: none;
+        width: 100%;
+    }
+    .content{
+        margin-left: 2%;
+        float: none;
+    }
+}
+@media screen and (max-width: 450px) {
+    .left-sidenav{
+        display: none;
+        visibility: hidden;
+        width: 100%;
+        text-align: left;
+        child-align: left;
+    }
+    .content{
+        margin-left: 2%;
+        float: none;
+    }
+}
+
+/*Menu Icon Start*/
+.menuIcon {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    cursor: pointer;
+    background-color: #252525;
+    padding: 9.5px 8.5px;
+    margin: 2rem 0;
+    border-radius: 25px;
+}
+
+.menuIcon:hover {
+    background-color: white;
+    .bar {
+        background-color: #0099FF;
+    }
+}
+
+.bar {
+    width: 35px;
+    height: 5px;
+    background-color: white;
+    margin: 3px 0;
+}
+
+.leftNav {
+    width: 100%;
+    text-align: left;
+    padding: 0;
+
+}
+
+.nav {
+    padding: 8% 15%;
+    font-family: "Montserrat", sans-serif;
+    text-transform: uppercase;
+    font-weight: 700;
+    border: none;
+    width: 100%;
+    color: #FFF;
+    border-top-left-radius: 999px;
+    border-bottom-left-radius: 999px;
+}
+.nav:hover {
+    background-color: white;
+    color: #0099FF;
+}
+
+.resume-footer {
+    width: 100%;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+    margin-bottom: 30px;
+    background-color: white;
+}
