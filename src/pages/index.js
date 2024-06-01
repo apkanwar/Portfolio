@@ -6,6 +6,7 @@ import TheLine from "@/components/theLine";
 import Contact from "@/components/contact";
 import Navbar from "@/components/navbar";
 import Head from "next/head";
+import Footer from "@/components/footer";
 
 export default function Home() {
     return (
@@ -20,6 +21,7 @@ export default function Home() {
             <AboutMe />
             <PresentationMode />
             <Contact />
+            <Footer />
         </>
     )
 }

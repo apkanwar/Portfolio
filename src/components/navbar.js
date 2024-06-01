@@ -7,7 +7,7 @@ export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
-    <div className='bg-dm-black pt-4'>
+    <div className='bg-dm-black pt-4 transition-none'>
       <header className="bg-white text-dm-black rounded-full w-[95vw] m-auto">
         <nav className="mx-auto flex max-w-7xl items-center justify-between p-3 lg:px-8">
           {/* Logo */}
@@ -90,13 +90,13 @@ export default function Navbar() {
         {/* Mobile Menu */}
         < Dialog as="div" className="lg:hidden" open={mobileMenuOpen} onClose={setMobileMenuOpen} >
           <div className="fixed inset-0 z-10" />
-          <Dialog.Panel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white p-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+          <Dialog.Panel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-8 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
             <div className="flex items-center justify-between">
               {/* Logo */}
               <Link href="#">
                 <img
                   className="h-8 w-auto"
-                  src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+                  src="/logo.PNG"
                   alt=""
                 />
               </Link>
@@ -112,44 +112,26 @@ export default function Navbar() {
             <div className="mt-6 flow-root">
               <div className="my-6 divide-y divide-gray-500/10 text-base font-semibold leading-9">
                 <div className="space-y-2 py-6">
-                  <Link
-                    href="/investments"
-                    className="-mx-3 block px-3 py-2 hover:bg-gray-50"
-                  >
-                    Investments
-                  </Link>
-                  <Link
-                    href="#"
-                    className="-mx-3 block px-3 py-2 hover:bg-gray-50"
-                  >
-                    How it Works
-                  </Link>
-                  <Link
-                    href="/faq"
-                    className="-mx-3 block px-3 py-2 hover:bg-gray-50"
-                  >
-                    FAQ
-                  </Link>
-                  <Link
-                    href="#"
-                    className="-mx-3 block px-3 py-2 hover:bg-gray-50"
-                  >
-                    Blog
-                  </Link>
+                  <div className="relative transition-none">
+                    <Link href={"/resume"}>
+                      Resume
+                    </Link>
+                  </div>
                 </div>
                 <div className="py-6">
-                  <Link
-                    href="#"
-                    className="-mx-3 block px-3 py-2.5 hover:bg-gray-50"
-                  >
-                    Log in
-                  </Link>
-                  <Link
-                    href="#"
-                    className="-mx-3 block px-3 py-2.5 hover:bg-gray-50"
-                  >
-                    Sign Up
-                  </Link>
+                  <div className="block rounded-lg py-2 transition hover:bg-white/5">
+                    <Link href={"/"}>
+                      <p className="font-semibold text-dm-black">Project 1</p>
+                      <p className="text-dm-black/50">Measure actions your users take</p>
+                    </Link>
+                  </div>
+
+                  <div className="block rounded-lg py-2 transition hover:bg-white/5">
+                    <Link href={"/"}>
+                      <p className="font-semibold text-dm-black">Project 2</p>
+                      <p className="text-dm-black/50">Start integrating products and tools</p>
+                    </Link>
+                  </div>
                 </div>
               </div>
             </div>

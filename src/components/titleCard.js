@@ -3,8 +3,8 @@ import Link from "next/link"
 export default function TitleCard() {
     return (
         <div className="bg-dm-black py-24">
-            <section className="mx-auto max-w-5xl flex flex-col justify-center items-center rounded" style={{ background: `url("ai_mountain.jpg")` }}>
-                <div className="py-44 w-full flex flex-col justify-center items-center bg-gray-400/50">
+            <section className="mx-4 xl:mx-auto max-w-5xl flex flex-col justify-center items-center rounded" style={{ background: `url("ai_mountain.jpg")` }}>
+                <div className="px-2 py-44 w-full flex flex-col text-center justify-center items-center bg-gray-400/50">
                     <p className="font-dText font-semibold text-white text-2xl">
                         WELCOME TO MY PORTFOLIO
                     </p>
