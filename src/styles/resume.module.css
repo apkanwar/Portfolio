@@ -1,41 +1,4 @@
 
-@media screen and (max-width: 1280px) {
-    .left-sidenav{
-        display: none;
-        visibility: visible;
-        width: 40%;
-        height: auto;
-    }
-    .content{
-        margin-left: 2%;
-        float: none;
-    }
-}
-@media screen and (max-width: 700px) {
-    .left-sidenav{
-        visibility: hidden;
-        display: none;
-        width: 100%;
-    }
-    .content{
-        margin-left: 2%;
-        float: none;
-    }
-}
-@media screen and (max-width: 450px) {
-    .left-sidenav{
-        display: none;
-        visibility: hidden;
-        width: 100%;
-        text-align: left;
-        child-align: left;
-    }
-    .content{
-        margin-left: 2%;
-        float: none;
-    }
-}
-
 /*Menu Icon Start*/
 .menuIcon {
     display: flex;
@@ -50,6 +13,7 @@
 
 .menuIcon:hover {
     background-color: white;
+
     .bar {
         background-color: #0099FF;
     }
@@ -80,15 +44,8 @@
     border-top-left-radius: 999px;
     border-bottom-left-radius: 999px;
 }
+
 .nav:hover {
     background-color: white;
     color: #0099FF;
-}
-
-.resume-footer {
-    width: 100%;
-    border-bottom-left-radius: 25px;
-    border-bottom-right-radius: 25px;
-    margin-bottom: 30px;
-    background-color: white;
 }

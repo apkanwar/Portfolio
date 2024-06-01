@@ -13,6 +13,17 @@ export default function handler(req, res) {
                         'Created and executed complex test scenarios for REST and SOAP APIs requiring field level encryption and pseudonymization.',
                         'Greatly improved the testing framework to handle negative test scenarios, different SSL certificates and overall readability of of the executed test reports.',
                         'Worked and led my team to work with multiple stakeholders within a project, including developers, project managers, inspectors.'
+                    ],
+                    skills: [
+                        'Java',
+                        'HTML',
+                        'CSS',
+                        'APIs'
+                    ],
+                    traits: [
+                        'Leadership',
+                        'Teamwork',
+                        'Problem Solving'
                     ]
                 },
                 {
@@ -23,6 +34,16 @@ export default function handler(req, res) {
                     details: [
                         'Created a frontend website that allowed contractors to sign up and market themselves to their clients, as well as provide financing opportunities.',
                         'Integrated AWS services (DynamoDB, AWS Cognito) to allow the users to create accounts and save their personal site information.'
+                    ],
+                    skills: [
+                        'GatsbyJS',
+                        'AWS DynamoDB',
+                        'AWS Cognito',
+                    ],
+                    traits: [
+                        'Leadership',
+                        'Problem Solving',
+                        'Communication'
                     ]
                 },
                 {
@@ -34,6 +55,13 @@ export default function handler(req, res) {
                         'Developed an mobile application using the Ionic Framework that allows users to scan, connect and monitor Bluetooth Low Energy (BLE) devices.',
                         'Worked closely with the electrical engineering team that created custom electronic devices that could be synced to a mobile device.',
                         'Created a versatile application that could be used on the web or your smartphone.'
+                    ],
+                    skills: [
+                        'AngularJS',
+                    ],
+                    traits: [
+                        'Work Independantly',
+                        'Creativity'
                     ]
                 },
                 {
@@ -44,6 +72,19 @@ export default function handler(req, res) {
                     details: [
                         'Migrated existing MS Access databases into new SQL databases.',
                         'Created a robust frontend that connected to the the SQL database and allowed for our company to more easily search, create or modify data.',
+                    ],
+                    skills: [
+                        'ASP.NET',
+                        'MS SQL',
+                        'HTML',
+                        'CSS',
+                        'JS',
+                        'C'
+                    ],
+                    traits: [
+                        'Teamwork',
+                        'Problem Solving',
+                        'Creativity'
                     ]
                 }
             ],
@@ -59,6 +100,28 @@ export default function handler(req, res) {
                         'Cofounder and Software Lead of the uOttawa first Electric Car Racing Team. Developed a program to run a BLDC motor for their electric vehicle and placed 4th at the Shell Eco-Marathon 2019 Americas.',
                     ]
                 },
+            ],
+            hobbies: [
+                {
+                    title: 'Working Out',
+                    details: [
+                        'I like to workout to take my mind off things when I overthink and it helps to open a fresh perspective.',
+                        'I like to keep in shape and enjoy improving myself and my body'
+                    ]
+                },
+                {
+                    title: 'Reading',
+                    details: [
+                        'I have adjusted to reading audiobooks as I go on walks. I try to read Non-Fiction tilles with one or two Fiction stories mixed in to keep things interesting.',
+                    ]
+                },
+                {
+                    title: 'Playing/Watching Sports',
+                    details: [
+                        "I've always been into sports. Playing anything the group is playing the current momment. I play Basketball and Volleyball as my main choice of sport.",
+                        "I also like to watch Basketball and Football. I guess you could say that's where my competitiveness comes from."
+                    ]
+                }
             ]
         }
     ]
