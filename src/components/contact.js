@@ -4,28 +4,28 @@ export default function Contact() {
     const [result, setResult] = useState("");
     const accessKey = "35557c5c-f048-4787-a560-fe6daa91c2f5"
 
-    const onSubmit = async (event) => {
+    async function handleSubmit(event) {
         event.preventDefault();
-        setResult("Sending....");
         const formData = new FormData(event.target);
 
-        formData.append("access_key", "YOUR_ACCESS_KEY_HERE");
+        formData.append("access_key", accessKey);
+
+        const object = Object.fromEntries(formData);
+        const json = JSON.stringify(object);
 
         const response = await fetch("https://api.web3forms.com/submit", {
             method: "POST",
-            body: formData
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json"
+            },
+            body: json
         });
-
-        const data = await response.json();
-
-        if (data.success) {
-            setResult("Form Submitted Successfully");
-            event.target.reset();
-        } else {
-            console.log("Error", data);
-            setResult(data.message);
+        const result = await response.json();
+        if (result.success) {
+            console.log(result);
         }
-    };
+    }
 
     return (
         <div id="contactCard" className="isolate bg-white px-6 py-14 sm:py-20 lg:px-8 relative">
@@ -38,7 +38,7 @@ export default function Contact() {
                 <h2 className="text-3xl py-6 font-bold tracking-tight text-gray-900 sm:text-4xl">Contact Me</h2>
                 <hr className="w-64 h-1 mx-auto bg-dm-black border-0 rounded" />
             </div>
-            <form onSubmit={onSubmit} className="mx-auto mt-8 max-w-xl sm:mt-12">
+            <form onSubmit={handleSubmit} className="mx-auto mt-8 max-w-xl sm:mt-12">
                 <input type="hidden" name="access_key" value={accessKey} />
                 <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
                     <div className="sm:col-span-2">
