@@ -23,7 +23,11 @@ export default function Contact() {
         });
         const result = await response.json();
         if (result.success) {
-            console.log(result);
+            setResult("Form Submitted Successfully, I'll be in Touch!");
+            event.target.reset();
+        } else {
+            console.log("Error", data);
+            setResult(data.message);
         }
     }
 
