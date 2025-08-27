@@ -6,7 +6,7 @@ export default function Document() {
       <Head>
         <link rel="Shortcut Icon" href="logo.PNG" />
       </Head>
-      <body className="bg-[#EEE] dark:bg-dm-black">
+      <body className="bg-[#EEE]">
         <Main />
         <NextScript />
       </body>

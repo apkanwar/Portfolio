@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
 export default function ResumeContent() {
@@ -39,7 +40,7 @@ export default function ResumeContent() {
             <hr />
             <div id="objectives" className="flex flex-col p-8 gap-6">
                 <div className="flex flex-row items-center gap-4">
-                    <img src="/icons/objectives.png" />
+                    <Image src="/icons/objectives.png" alt="Objectives Icon" width={32} height={32} />
                     <h2 className="font-headings font-semibold text-2xl uppercase">Objectives</h2>
                 </div>
                 <p className="font-dText text-lg">
@@ -48,8 +49,8 @@ export default function ResumeContent() {
             </div>
 
             <div id="work" className="flex flex-col p-8 gap-6">
-                <div className="flex flex-row items-end gap-4">
-                    <img src="/icons/work_experience.png" />
+                <div className="flex flex-row gap-4 items-center">
+                    <Image src="/icons/work_experience.png" alt="Work Experience Icon" width={32} height={32} />
                     <h2 className="font-headings font-semibold text-2xl uppercase">Work Experience</h2>
                 </div>
                 {workExperience.map(({ key, title, company, duration, details, skills, traits }) => (
@@ -83,8 +84,8 @@ export default function ResumeContent() {
             </div>
 
             <div id="education" className="flex flex-col p-8 gap-6">
-                <div className="flex flex-row items-end gap-4">
-                    <img src="/icons/education.png" />
+                <div className="flex flex-row items-center gap-4">
+                    <Image src="/icons/education.png" alt="Education Icon" width={32} height={32} />
                     <h2 className="font-headings font-semibold text-2xl uppercase">Education</h2>
                 </div>
                 {education.map(({ key, title, institution, duration, details }) => (
@@ -106,8 +107,8 @@ export default function ResumeContent() {
             </div>
 
             <div id="hobbies" className="flex flex-col p-8 gap-6">
-                <div className="flex flex-row items-end gap-4">
-                    <img src="/icons/skills.png" />
+                <div className="flex flex-row items-center gap-4">
+                    <Image src="/icons/skills.png" alt="Skills Icon" width={32} height={32} />
                     <h2 className="font-headings font-semibold text-2xl uppercase">Hobbies</h2>
                 </div>
                 {hobbies.map(({ title, details }) => (

@@ -103,7 +103,7 @@ export default function Contact() {
                     </div>
                 </div>
                 <div className="mt-10">
-                    <button type="submit" className="block rounded-full bg-eazy-main-100 px-8 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                    <button type="submit" className="block rounded-full bg-eazy-main-100 px-8 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 transition ease-in duration-200">
                         Send
                     </button>
                 </div>

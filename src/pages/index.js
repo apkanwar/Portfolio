@@ -1,13 +1,12 @@
 
 import TitleCard from "@/components/titleCard"
-import PresentationMode from "@/components/presentationMode";
 import AboutMe from "@/components/aboutCard";
 import TheLine from "@/components/theLine";
 import Contact from "@/components/contact";
 import Navbar from "@/components/navbar";
 import Head from "next/head";
 import Footer from "@/components/footer";
-import ProjectsView from "@/components/projectsView";
+import ProjectCards from "@/components/cards/projectCards";
 
 export default function Home() {
     return (
@@ -20,7 +19,7 @@ export default function Home() {
             <TitleCard />
             <TheLine />
             <AboutMe />
-            <ProjectsView />
+            <ProjectCards />
             <Contact />
             <Footer />
         </>
