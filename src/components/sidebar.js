@@ -7,7 +7,7 @@ import useWindowDimensions from '@/hooks/useWindowDimensions';
 
 export default function SideBar() {
     const [open, setOpen] = useState('true');
-    const { height, width } = useWindowDimensions();
+    const { width } = useWindowDimensions();
 
     useEffect(() => {
         if (width <= 1024) {
@@ -41,10 +41,10 @@ export default function SideBar() {
         <div className='select-none'>
             <div id="sidebar-tab" className='lg:fixed lg:min-h-[calc(100%-3rem)] m-7 lg:m-0 lg:ml-7 px-2 flex lg:flex-col flex-row items-center justify-between bg-dm-black rounded-l-2xl'>
                 <div className='text-center xl:block hidden'>
-                    <div id='menu-icon' className={styles.menuIcon} onClick={closeTab}>
-                        <div id="bar1" className={styles.bar}></div>
-                        <div id="bar2" className={styles.bar}></div>
-                        <div id="bar3" className={styles.bar}></div>
+                    <div id='menu-icon' className={`${styles.menuIcon} group hover:bg-white`} onClick={closeTab}>
+                        <div id="bar1" className={`${styles.bar} group-hover:bg-eazy-main-100`}></div>
+                        <div id="bar2" className={`${styles.bar} group-hover:bg-eazy-main-100`}></div>
+                        <div id="bar3" className={`${styles.bar} group-hover:bg-eazy-main-100`}></div>
                     </div>
                     <a target="_blank" href="files/resume.pdf" className='px-2 py-4 hover:bg-white hover:text-eazy-main-100 text-white rounded-full'>
                         <ResumeIcon fontSize='large' />

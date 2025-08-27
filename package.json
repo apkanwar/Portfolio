@@ -12,12 +12,10 @@
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
-    "@headlessui/react": "^2.0.4",
-    "@heroicons/react": "^2.0.18",
+    "@headlessui/react": "^2.2.7",
     "@material-tailwind/react": "^2.1.4",
     "@mui/icons-material": "^5.14.15",
     "autoprefixer": "10.4.14",
-    "eslint": "8.41.0",
     "eslint-config-next": "13.4.3",
     "next": "13.4.3",
     "postcss": "8.4.23",
@@ -25,7 +23,6 @@
     "react": "18.2.0",
     "react-admin": "^4.16.5",
     "react-dom": "18.2.0",
-    "react-toggle-dark-mode": "^1.1.1",
     "tailwindcss": "3.3.2"
   }
 }

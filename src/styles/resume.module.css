@@ -11,14 +11,6 @@
     border-radius: 25px;
 }
 
-.menuIcon:hover {
-    background-color: white;
-
-    .bar {
-        background-color: #0099FF;
-    }
-}
-
 .bar {
     width: 35px;
     height: 5px;

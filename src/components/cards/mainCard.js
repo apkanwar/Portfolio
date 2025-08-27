@@ -9,9 +9,8 @@ const MainCard = ({ image, title, description, tags = [], liveLink, repoLink }) 
                 <Image
                     src={image}
                     alt={title}
-                    layout="fill"
-                    objectFit="cover"
-                    className="transition-transform duration-300 group-hover:scale-110"
+                    fill
+                    className="object-cover transition-transform duration-300 group-hover:scale-110"
                 />
             </div>
 

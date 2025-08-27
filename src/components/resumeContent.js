@@ -34,7 +34,7 @@ export default function ResumeContent() {
             <div className="flex flex-wrap flex-row justify-between items-center p-5 font-headings uppercase font-semibold">
                 <h1 className="text-3xl">My Resume</h1>
                 <h3 className="text-xl">Updated:
-                    <span className="text-eazy-main-100"> June 1, 2024</span>
+                    <span className="text-eazy-main-100"> Aug 27, 2025</span>
                 </h3>
             </div>
             <hr />

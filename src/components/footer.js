@@ -5,10 +5,8 @@ export default function Footer() {
         <Image
           src="/ai_mountain.jpg"
           alt="Footer Background"
-          layout="fill"
-          objectFit="cover"
-          objectPosition="top"
-          className="z-0 scale-100 object-top transition-transform duration-[4000ms]"
+          fill
+          className="z-0 object-cover object-top scale-100 transition-transform duration-[4000ms]"
           priority
         />
         <section className="relative z-10 text-white text-center">

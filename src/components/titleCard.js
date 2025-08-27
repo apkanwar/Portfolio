@@ -7,9 +7,8 @@ export default function TitleCard() {
                 <Image
                     src="/ai_mountain.jpg"
                     alt="Background"
-                    layout="fill"
-                    objectFit="cover"
-                    className="z-0 scale-150 transition-transform duration-[4000ms]"
+                    fill
+                    className="z-0 object-cover scale-150 transition-transform duration-[4000ms]"
                     priority
                 />
                 <div className="px-2 py-44 w-full flex flex-col text-center justify-center items-center bg-gray-400/50 z-10">

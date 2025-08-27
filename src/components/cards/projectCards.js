@@ -2,7 +2,7 @@ import MainCard from "./mainCard";
 
 const projects = [
   {
-    image: "/ai_mountain.jpg",
+    image: "/projects/topjatt.png",
     title: "TopJatt",
     description: "A trading platform to track and visualize stock, crypto, and futures trades while showcasing performance and achievements.",
     tags: ["NextJS", "MongoDB", "NextAuth", "Docker"],
@@ -10,7 +10,7 @@ const projects = [
     repoLink: "https://github.com/apkanwar/TopJatt"
   },
   {
-    image: "/ai_mountain.jpg",
+    image: "/projects/ensured.png",
     title: "Ensured Employment",
     description: "An employment agency that allows for job seekers to submit resumes and employers to submit job openings. It also has a blog fetching articles to be read by the users.",
     tags: ["NextJS", "Google Firestore", "Google Storage"],
@@ -18,7 +18,7 @@ const projects = [
     repoLink: "https://github.com/apkanwar/EEServices"
   },
   {
-    image: "/ai_mountain.jpg",
+    image: "/projects/finsimpl.png",
     title: "FinSimpl",
     description: "FinSimpl is a service that allows users to allows contractors to interact with their clients help them find the perfect lender for their next contracting needs.",
     tags: ["GatsbyJS", "AWS Cognito", "DynamoDB"],
@@ -26,7 +26,7 @@ const projects = [
     repoLink: "https://github.com/Finsimpl/www"
   },
   {
-    image: "/ai_mountain.jpg",
+    image: "/projects/biocomputing.png",
     title: "BioComputing Circuit Designer",
     description: "The BioComputing Circuit Designer allows for users to model currently existing biocomputing networks online using a drag and drop toolkit from the P5JS library.",
     tags: ["Django"],
@@ -34,7 +34,7 @@ const projects = [
     repoLink: "https://github.com/uOttawa-Biotalent-Biocomputing-Software/Biocomputing-Circuit-Designer"
   },
   {
-    image: "/ai_mountain.jpg",
+    image: "/projects/xlab.png",
     title: "X-Labs",
     description: "A cross-platform Web and Android application that enables users to discover, connect to, and interact with Bluetooth Low Energy (BLE) devices.",
     tags: ["AngularJS", "Ionic"],
@@ -42,7 +42,7 @@ const projects = [
     repoLink: ""
   },
   {
-    image: "/ai_mountain.jpg",
+    image: "/projects/investeazy.png",
     title: "InvestEazy",
     description: "A mock real estate investment platform showcasing clean UI/UX design, where users can explore and fractionally invest in residential and commercial properties.",
     tags: ["NextJS", "TailwindCSS"],
