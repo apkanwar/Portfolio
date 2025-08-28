@@ -103,7 +103,7 @@ export default function Sidebar() {
                     return (
                       <li key={page.slug}>
                         <Link
-                          href={`/wiki/${page.slug}`}
+                          href={`/docs/${page.slug}`}
                           className={`block px-3 py-2 rounded-lg ${pathname?.endsWith(page.slug)
                             ? 'bg-gray-800 text-white'
                             : 'text-gray-400 hover:bg-gray-700'
