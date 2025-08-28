@@ -1,0 +1,14 @@
+.prose {
+    max-width: 100%;
+}
+
+.prose pre {
+    background-color: #1e1e1e;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    overflow-x: auto;
+}
+
+.prose code {
+    color: #f8f8f2;
+}

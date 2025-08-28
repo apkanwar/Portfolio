@@ -3,7 +3,7 @@ import Image from 'next/image';
 export default function TitleCard() {
     return (
         <div className="bg-dm-black py-24 pt-32">
-            <section className="relative mx-4 xl:mx-auto max-w-5xl flex flex-col justify-center items-center rounded overflow-hidden">
+            <section className="relative mx-4 xl:mx-auto max-w-5xl flex flex-col justify-center items-center rounded-xl overflow-hidden">
                 <Image
                     src="/ai_mountain.jpg"
                     alt="Background"
@@ -24,7 +24,7 @@ export default function TitleCard() {
                 </div>
                 <div className="py-8 w-full flex justify-center items-center bg-gray-10 z-10">
                     <a href="#projectsCard">
-                        <button className="py-3 px-6 border-solid border-2 border-white rounded font-dText font-semibold
+                        <button className="py-3 px-6 border-solid border-2 border-white rounded-xl font-dText font-semibold
                                  hover:bg-gray-900/20 text-white transition ease-in duration-200">
                             LEARN MORE
                         </button>
