@@ -5,8 +5,18 @@ import 'prismjs/components/prism-bash';
 import 'prismjs/components/prism-docker';
 import 'prismjs/components/prism-jsx';
 import 'prismjs/components/prism-tsx';
+import { ContentCopy } from '@mui/icons-material';
+import { useState, useEffect } from 'react';
 
 export default function ContentRenderer({ content }) {
+  const [copiedIndex, setCopiedIndex] = useState(null);
+  useEffect(() => {
+    if (copiedIndex !== null) {
+      const timeout = setTimeout(() => setCopiedIndex(null), 1500);
+      return () => clearTimeout(timeout);
+    }
+  }, [copiedIndex]);
+
   return (
     <div className='w-full'>
       {(!content || content.length === 0) ? (
@@ -23,22 +33,26 @@ export default function ContentRenderer({ content }) {
               const lines = block.code.split('\n');
               return (
                 <div key={index} className="relative group">
-                  <button
-                    onClick={() => navigator.clipboard.writeText(block.code)}
-                    className="absolute top-2 right-2 z-10 opacity-0 group-hover:opacity-100 text-xs bg-gray-700 text-white px-2 py-1 rounded"
-                  >
-                    Copy
+                  <button onClick={() => {
+                    navigator.clipboard.writeText(block.code);
+                    setCopiedIndex(index);
+                  }}
+                    className="absolute top-2 right-2 z-10 text-xs bg-gray-700 hover:bg-gray-600 border border-white text-white px-1.5 py-1.5 rounded-lg">
+                    <ContentCopy fontSize='small' />
                   </button>
+                  {copiedIndex === index && (
+                    <div className="absolute top-2 right-14 bg-green-600 text-white text-xs px-2 py-1 rounded shadow-lg">
+                      ✓ Copied!
+                    </div>
+                  )}
                   <pre className="p-4 rounded-lg overflow-x-auto bg-gray-800 flex text-sm">
                     <div className="text-gray-500 pr-4 text-right select-none">
                       {lines.map((_, i) => (
                         <div key={i} className="leading-[21px]">{i + 1}</div>
                       ))}
                     </div>
-                    <code
-                      className={`language-${block.language}`}
-                      dangerouslySetInnerHTML={{ __html: highlighted }}
-                    />
+                    <code className={`language-${block.language}`}
+                      dangerouslySetInnerHTML={{ __html: highlighted }} />
                   </pre>
                 </div>
               );
