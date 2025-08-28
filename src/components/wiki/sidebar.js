@@ -33,7 +33,7 @@ export default function Sidebar() {
   };
 
   return (
-    <aside className="w-80 bg-midnight-black p-6 border-r-2 border-gray-800 lg:block font-headings">
+    <aside className="w-80 bg-midnight-black p-6 border-r-2 border-gray-800 lg:block font-headings sticky top-0 h-screen overflow-y-auto">
       <h2 className="text-xl font-bold mb-6 text-white">Atinderpaul Docs</h2>
       <div className="relative w-full">
         <span className="absolute inset-y-0 left-0 flex items-center pl-4 text-gray-400">
