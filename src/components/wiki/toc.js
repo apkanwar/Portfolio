@@ -44,11 +44,11 @@ export default function TOC() {
       className="font-headings w-52 pr-8 hidden xl:block sticky top-24 self-start text-sm text-white max-h-full overflow-y-auto"
     >
       {headings.length > 0 &&
-        <div className="text-sm font-semibold text-gray-300 mb-4 uppercase tracking-wide">
+        <div className="text-sm font-semibold text-gray-300 pb-1 mb-3 uppercase tracking-wide border-b">
           On this page
         </div>
       }
-      <nav className="flex flex-col space-y-1">
+      <nav className="flex flex-col space-y-3">
         {headings.map((heading, i) => (
           <a
             key={i}

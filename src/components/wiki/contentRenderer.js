@@ -83,7 +83,7 @@ export default function ContentRenderer({ content }) {
                     {isList ? (
                       <ul className="list-disc list-inside space-y-1">
                         {calloutLines.map((line, i) => (
-                          <li key={i}>{line}</li>
+                          <li key={'callout-' + i}>{line}</li>
                         ))}
                       </ul>
                     ) : (
@@ -107,7 +107,7 @@ export default function ContentRenderer({ content }) {
                 <ListTag key={index}
                   className={`${block.variant === 'ordered' ? 'list-decimal' : 'list-disc'} list-inside pl-5 mb-3 mt-4 font-dText text-white`}>
                   {block.list.map((item, i) => (
-                    <li key={i} className='mb-1'>{item}</li>
+                    <li key={'list-' + i} className='mb-1'>{item}</li>
                   ))}
                 </ListTag>
               );

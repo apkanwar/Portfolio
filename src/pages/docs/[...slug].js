@@ -1,32 +1,15 @@
-import { useRouter } from 'next/router';
 import wikiContent from '@/data/wikiContent';
 import DocsLayout from '@/components/wiki/docsLayout';
 import ContentRenderer from '@/components/wiki/contentRenderer';
 import Head from 'next/head';
 import Link from 'next/link';
 
-export default function DocsPage() {
-    const router = useRouter();
-    const { slug = [] } = router.query;
-    const slugPath = Array.isArray(slug) ? slug.join('/') : slug;
-
-    // Find Path in WikiContent JSON
-    const page = Object.values(wikiContent)
-        .flatMap((section) => section.pages)
-        .find((p) => p.slug === slugPath);
-
-    if (!page) {
-        return (
-            <DocsLayout>
-                <p className="text-red-500">Page not found.</p>
-            </DocsLayout>
-        );
-    }
-
-    const sectionEntry = Object.entries(wikiContent).find(([_, section]) =>
-        section.pages.some(p => p.slug === slugPath)
-    );
-    const sectionTitle = sectionEntry?.[1]?.title || '';
+export default function DocsPage({ section, page }) {
+    const sectionTitle = section?.title || '';
+    const sectionPages = Object.values(wikiContent).flatMap(s => s.pages);
+    const currentIndex = sectionPages.findIndex(p => p.slug === page.slug);
+    const prevPage = sectionPages[currentIndex - 1];
+    const nextPage = sectionPages[currentIndex + 1];
 
     return (
         <>
@@ -41,36 +24,65 @@ export default function DocsPage() {
                 <ContentRenderer content={page.content} />
 
                 <div className="mt-10 flex justify-between font-headings text-blue-400 cursor-default">
-                    {sectionEntry && (() => {
-                        const pages = sectionEntry[1].pages;
-                        const currentIndex = pages.findIndex(p => p.slug === slugPath);
-                        const prevPage = pages[currentIndex - 1];
-                        const nextPage = pages[currentIndex + 1];
+                    <>
+                        {prevPage ? (
+                            <Link href={`/docs/${prevPage.slug}`}
+                                className="rounded-xl p-4 ring-1 ring-white/10 bg-white/5 hover:underline">
+                                ← {prevPage.title}
+                            </Link>
+                        ) : <span />}
 
-                        return (
-                            <>
-                                {prevPage ? (
-                                    <Link href={`/docs/${prevPage.slug}`}
-                                        className="rounded-xl p-4 ring-1 ring-white/10 bg-white/5 hover:underline">
-                                        ← {prevPage.title}
-                                    </Link>
-                                ) : <span />}
-
-                                {nextPage ? (
-                                    <Link href={`/docs/${nextPage.slug}`}
-                                        className="rounded-xl p-4 ring-1 ring-white/10 bg-white/5 hover:underline">
-                                        {nextPage.title} →
-                                    </Link>
-                                ) :
-                                    <span className='rounded-xl p-4 ring-1 ring-white/10 bg-white/5'>
-                                        You've Finished {sectionTitle} 🎉
-                                    </span>
-                                }
-                            </>
-                        );
-                    })()}
+                        {nextPage ? (
+                            <Link href={`/docs/${nextPage.slug}`}
+                                className="rounded-xl p-4 ring-1 ring-white/10 bg-white/5 hover:underline">
+                                {nextPage.title} →
+                            </Link>
+                        ) : <span />}
+                    </>
                 </div>
             </DocsLayout>
         </>
     );
+}
+
+export async function getStaticPaths() {
+    const paths = [];
+
+    Object.values(wikiContent).forEach(section => {
+        section.pages.forEach(page => {
+            const slugParts = page.slug.split('/');
+            paths.push({ params: { slug: slugParts } });
+        });
+    });
+
+    return {
+        paths,
+        fallback: false,
+    };
+}
+
+export async function getStaticProps({ params }) {
+    const fullSlug = params.slug.join('/');
+    let matchedPage = null;
+    let matchedSection = null;
+
+    for (const [sectionKey, section] of Object.entries(wikiContent)) {
+        const page = section.pages.find((p) => p.slug === fullSlug);
+        if (page) {
+            matchedPage = page;
+            matchedSection = { title: section.title };
+            break;
+        }
+    }
+
+    if (!matchedPage) {
+        return { notFound: true };
+    }
+
+    return {
+        props: {
+            page: matchedPage,
+            section: matchedSection,
+        },
+    };
 }
