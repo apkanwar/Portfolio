@@ -14,7 +14,7 @@ export default function DocsPage({ section, page }) {
     return (
         <>
             <Head>
-                <title>Atinderpaul Kanwar - Docs</title>
+                <title>Atinderpaul Docs</title>
             </Head>
             <DocsLayout>
                 <p className="text-sm text-gray-400 mb-4 font-headings cursor-default">

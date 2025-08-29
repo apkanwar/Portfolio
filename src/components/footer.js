@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 export default function Footer() {
     return (
       <div className="pb-24 pt-12 relative w-full overflow-hidden">
@@ -11,7 +12,7 @@ export default function Footer() {
         />
         <section className="relative z-10 text-white text-center">
           <p className="font-dText text-xl font-bold">
-            &copy; 2024 Atinderpaul Kanwar
+            <Link href={'/docs'}>&copy;</Link> 2025 Atinderpaul Kanwar
           </p>
         </section>
       </div>

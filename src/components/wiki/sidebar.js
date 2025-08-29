@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import wikiContent from '@/data/wikiContent';
 import { useState } from 'react';
-import { Search, OpenInFull, CloseFullscreen, KeyboardArrowDown, KeyboardArrowUp } from '@mui/icons-material';
+import { Search, OpenInFull, CloseFullscreen, KeyboardArrowDown, KeyboardArrowUp, KeyboardBackspace, HomeRounded } from '@mui/icons-material';
 
 export default function Sidebar() {
   const pathname = usePathname();
@@ -34,7 +34,17 @@ export default function Sidebar() {
 
   return (
     <aside className="w-80 bg-midnight-black p-6 border-r-2 border-gray-800 lg:block font-headings sticky top-0 h-screen overflow-y-auto">
-      <h2 className="text-xl font-bold mb-6 text-white">Atinderpaul Docs</h2>
+      <div className='flex flex-row justify-between mb-6 items-center'>
+        <Link href={'/'}
+          className="text-sm bg-gray-700 text-white px-1.5 py-1.5 hover:bg-gray-600 rounded-lg border-white border">
+          <KeyboardBackspace fontSize='small' />
+        </Link>
+        <h2 className="text-xl font-bold mb-0 pb-0 text-white">Atinderpaul Docs</h2>
+        <Link href={'/docs'}
+          className="text-sm bg-gray-700 text-white px-1.5 py-1.5 hover:bg-gray-600 rounded-lg border-white border">
+          <HomeRounded fontSize='small' />
+        </Link>
+      </div>
       <div className="relative w-full">
         <span className="absolute inset-y-0 left-0 flex items-center pl-4 text-gray-400">
           <Search className="h-6 w-6" />
