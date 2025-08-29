@@ -43,9 +43,11 @@ export default function TOC() {
     <aside
       className="font-headings w-52 pr-8 hidden xl:block sticky top-24 self-start text-sm text-white max-h-full overflow-y-auto"
     >
-      <div className="text-sm font-semibold text-gray-300 mb-4 uppercase tracking-wide">
-        On this page
-      </div>
+      {headings.length > 0 &&
+        <div className="text-sm font-semibold text-gray-300 mb-4 uppercase tracking-wide">
+          On this page
+        </div>
+      }
       <nav className="flex flex-col space-y-1">
         {headings.map((heading, i) => (
           <a

@@ -5,7 +5,7 @@ import 'prismjs/components/prism-bash';
 import 'prismjs/components/prism-docker';
 import 'prismjs/components/prism-jsx';
 import 'prismjs/components/prism-tsx';
-import { ContentCopy, CropFree } from '@mui/icons-material';
+import { ContentCopy, CropFree, WarningAmber, InfoOutlined, CheckCircleOutline } from '@mui/icons-material';
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -60,12 +60,14 @@ export default function ContentRenderer({ content }) {
                 </div>
               );
             case 'callout':
+              const calloutLines = block.text.split('\n');
+              const isList = calloutLines.length > 1;
               return (
                 <>
                   {block.variant === 'success' && <hr className='mt-12' />}
                   <div
                     key={index}
-                    className={`border-l-4 pl-4 py-2 my-4 rounded-md font-dText ${block.variant === 'info'
+                    className={`border-l-4 pl-4 flex flex-row items-center gap-2 py-2 my-4 rounded-md font-dText ${block.variant === 'info'
                       ? 'border-blue-500 bg-blue-100 text-blue-900'
                       : block.variant === 'warning'
                         ? 'border-yellow-800 bg-yellow-100 text-yellow-900'
@@ -74,7 +76,19 @@ export default function ContentRenderer({ content }) {
                           : 'border-gray-500 bg-gray-100 text-gray-900'
                       }`}
                   >
-                    {block.text}
+                    {block.variant === 'info' && <InfoOutlined fontSize="small" />}
+                    {block.variant === 'warning' && <WarningAmber fontSize="small" />}
+                    {block.variant === 'success' && <CheckCircleOutline fontSize="small" />}
+
+                    {isList ? (
+                      <ul className="list-disc list-inside space-y-1">
+                        {calloutLines.map((line, i) => (
+                          <li key={i}>{line}</li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <p>{block.text}</p>
+                    )}
                   </div>
                 </>
               );

@@ -26,7 +26,7 @@ const wikiContent = {
                         text: "MongoDB Compass Install"
                     },
                     { type: "callout", variant: "info", text: "Optional: Install MongoDB Compass to view your data without going to the website." },
-                    { type: "callout", variant: "success", text: "🙌 Congrats, let's get you set up with MongoDB in your project!" },
+                    { type: "callout", variant: "success", text: "🙌 Congrats, let's get you set up with MongoDB in your project!" }
                 ]
             },
             {
@@ -97,6 +97,7 @@ module.exports = clientPromiseThenable;
 module.exports.getMongoClient = getMongoClient;
 module.exports.getDb = getDb;`
                     },
+                    { type: "callout", variant: "success", text: "🙌 Congrats, you've connected Mongo to your computer and project!" },
                 ]
             },
             {
@@ -230,22 +231,259 @@ export default async function handler(req, res) {
                             }
                         ]
                     },
-                    { type: "heading", text: "Update Document in Collection" },
+                    { type: "heading", text: "Update or Delete Single Document in Collection" },
+                    { type: "paragraph", text: "The reason we have update and delete in the same document is because we are modifing a specific document which is found through a unique key (Object ID)." },
                     {
                         type: "code",
                         language: "javascript",
-                        code: ``
+                        code: `// /src/pages/api/[id].js
+import clientPromise from '@/lib/mongodb';
+import { ObjectId } from 'mongodb';
+
+export default async function handler(req, res) {
+  const { id } = req.query;
+  if (!id || !ObjectId.isValid(id)) return res.status(400).json({ error: 'Invalid id' });
+
+  const client = await clientPromise;
+  const db = client.db('my_app'); // Add DB Name
+  const collection = db.collection('trades'); // Add Collection Name
+  const _id = new ObjectId(id);
+
+  if (req.method === 'PUT') {
+    const { buyPrice, sellPrice, shares, leverage, boughtAt, soldAt } = req.body || {};
+    if (buyPrice == null || shares == null || leverage == null) {
+      return res.status(400).json({ error: 'buyPrice, shares, and leverage are required' });
+    }
+    const levNum = Number(leverage);
+    if (!Number.isFinite(levNum) || levNum <= 0) {
+      return res.status(400).json({ error: 'leverage must be a positive number' });
+    }
+
+    const existing = await collection.findOne({ _id });
+    if (!existing) return res.status(404).json({ error: 'Not found' });
+
+    // both-or-none rule
+    const hasSoldDate  = !!soldAt;
+    const hasSellPrice = sellPrice != null && sellPrice !== '';
+    if (hasSoldDate !== hasSellPrice) {
+      return res.status(400).json({ error: 'soldAt and sellPrice must be provided together or both omitted' });
+    }
+
+    const update = {
+      buyPrice: Number(buyPrice),
+      shares: Number(shares),
+      leverage: levNum,
+      boughtAt: boughtAt ? new Date(boughtAt) : null,
+      lastModified: new Date(),
+    };
+    if (hasSoldDate) {
+      update.soldAt   = new Date(soldAt);
+      update.sellPrice = Number(sellPrice);
+    } else {
+      update.soldAt = null;
+      update.sellPrice = null;
+    }
+
+    const result = await collection.updateOne({ _id }, { $set: update });
+    return res.status(200).json({ ok: result.modifiedCount === 1 });
+  }
+
+  if (req.method === 'DELETE') {
+    const r = await collection.deleteOne({ _id });
+    return res.status(200).json({ ok: r.deletedCount === 1 });
+  }
+
+  res.setHeader('Allow', ['PUT', 'DELETE']);
+  res.status(405).end('Method Not Allowed');
+}`
                     },
-                    { type: "paragraph", text: "The code above is messy, but the table below explains which comments to look for." },
+                    { type: "heading", text: "Delete Multiple Documents in Collection" },
                     {
-                        type: "table", variant: 'column', list: [
-                            {
-                                'Line ': "",
-                                'Line ': "",
-                                'Line ': ""
-                            }
-                        ]
+                        type: "code",
+                        language: "javascript",
+                        code: `// /src/pages/api/bulk-delete.js
+import clientPromise from '@/lib/mongodb';
+import { ObjectId } from 'mongodb';
+
+export default async function handler(req, res) {
+    if (req.method !== 'POST') {
+        res.setHeader('Allow', ['POST']);
+        return res.status(405).json({ error: 'Method Not Allowed' });
+    }
+
+    try {
+        const { ids } = req.body || {};
+        if (!Array.isArray(ids) || ids.length === 0) {
+            return res.status(400).json({ error: 'ids array required' });
+        }
+
+        // Convert to ObjectId, skip invalids
+        const objectIds = ids
+            .map((id) => {
+                try { return new ObjectId(id); } catch { return null; }
+            })
+            .filter(Boolean);
+
+        if (objectIds.length === 0) {
+            return res.status(400).json({ error: 'No valid ids' });
+        }
+
+        const client = await clientPromise;
+        const db = client.db('my_app'); // Add DB Name
+        const result = await db.collection('trades').deleteMany({ _id: { $in: objectIds } }); // Add Collection Name
+
+        return res.status(200).json({
+            ok: true,
+            deletedCount: result.deletedCount || 0,
+            requested: ids.length,
+            processed: objectIds.length,
+        });
+    } catch (e) {
+        console.error('bulk-delete error', e);
+        return res.status(500).json({ error: 'Internal Server Error' });
+    }
+}`
                     },
+                    { type: "callout", variant: "success", text: "🙌 Congrats, you've setup the API calls that you would need to make in your app to modify your Mongo database." },
+                ]
+            },
+            {
+                slug: "mongodb/frontend",
+                title: "Linking CRUD to Frontend",
+                content: [
+                    { type: "heading", text: "Add Documents" },
+                    { type: "paragraph", text: "You need to input the payload object on Line 5 and this try catch can go inside a function that can be triggered on a button click." },
+                    {
+                        type: "code",
+                        language: "javascript",
+                        code: `try {
+    const res = await fetch('/api/trades', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+    });
+    if (!res.ok) { setMessage('Save All failed'); return; }
+    setCart([]); setQuery(''); setResults([]);
+    setSuccessMessage('New Trades Saved!');
+    setSearchInfo('');
+} catch (e) {
+    console.error('save error', e);
+    setSuccessMessage('Save All failed');
+}`
+                    },
+                    { type: "heading", text: "Search Documents" },
+                    {
+                        type: "code",
+                        language: "javascript",
+                        code: `const [page, setPage] = useState(1);
+const [nameQ, setNameQ] = useState("");
+
+async function load(p = page) {
+    try {
+        const params = new URLSearchParams({ page: String(p), pageSize: String(pageSize), q: nameQ, status });
+        const res = await fetch('/api/trades?{params}');
+        const data = await res.json();
+        setRows(data.items || []);
+        setTotal(data.total || 0);
+        setPage(data.page || p);
+    } catch {
+        setError("Failed to load trades");
+    } finally {
+        setLoading(false);
+    }
+}`
+                    },
+                    { type: "callout", variant: "info", text: "nameQ is the search term using when searching. \n {params} should be ${params.toString()} on Line 7" },
+                    { type: "heading", text: "Edit Document" },
+                    { type: "paragraph", text: "Editing Documents is longer due to having to mutiple actions the user can take while editing." },
+
+                    {
+                        type: "code",
+                        language: "javascript",
+                        code: `const [editingId, setEditingId] = useState(null);
+const [form, setForm] = useState({ buyPrice: "", sellPrice: "", shares: "", boughtAt: "", soldAt: "", leverage: "" });
+const [savingId, setSavingId] = useState(null);
+
+const startEdit = (r) => {
+    setEditingId(r._id);
+    setForm({
+        buyPrice: r.buyPrice?.toFixed?.(2) ?? "",
+        sellPrice: r.sellPrice != null ? Number(r.sellPrice).toFixed(2) : "",
+        shares: r.shares ?? "",
+        boughtAt: r.boughtAt ? new Date(r.boughtAt).toISOString().slice(0, 10) : "",
+        soldAt: r.soldAt ? new Date(r.soldAt).toISOString().slice(0, 10) : "",
+        leverage: r.leverage != null ? String(r.leverage) : "1",
+    });
+    setError("");
+};
+const cancelEdit = () => {
+    setEditingId(null);
+    setForm({ buyPrice: "", sellPrice: "", shares: "", boughtAt: "", soldAt: "", leverage: "" });
+};
+const onEdit = (e) => setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+
+const saveRow = async (id) => {
+    try {
+        setSavingId(id);
+        const body = {
+            buyPrice: Number(form.buyPrice),
+            shares: Number(form.shares),
+            boughtAt: form.boughtAt || null,
+            soldAt: form.soldAt || null,
+            sellPrice: hasSellPrice ? Number(form.sellPrice) : null,
+            leverage: form.leverage === "" ? 1 : Number(form.leverage),
+        };
+        const res = await fetch('/api/trades/{id}', { method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+        if (!res.ok) throw new Error("Update failed");
+        await load(page);
+        cancelEdit();
+    } catch {
+        setError("Failed to save changes.");
+    } finally {
+        setSavingId(null);
+    }
+};`
+                    },
+                    { type: "callout", variant: "info", text: "{id} should be ${id} on Line 34" },
+                    { type: "heading", text: "Delete Documents" },
+                    { type: "paragraph", text: "" },
+                    {
+                        type: "code",
+                        language: "javascript",
+                        code: `const [selectedIds, setSelectedIds] = useState(new Set());
+
+// Delete Sigle Document
+const deleteRow = async (id) => {
+    if (!confirm("Delete this trade?")) return;
+    try {
+        const res = await fetch('/api/trades/{id}', { method: "DELETE" });
+        if (!res.ok) throw new Error("Delete failed");
+        await load(page);
+    } catch {
+        setError("Failed to delete trade.");
+    }
+};
+
+// Delete Mutiple Documents
+const deleteSelected = async () => {
+    if (selectedIds.size === 0) return;
+    if (!confirm('Delete {selectedIds.size} selected trade(s)?')) return;
+    try {
+        const res = await fetch('/api/trades/bulk-delete', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ ids: Array.from(selectedIds) }),
+        });
+        if (!res.ok) throw new Error('Bulk delete failed');
+        clearSelection();
+        await load(page);
+    } catch {
+        setError('Failed to delete some trades.');
+    }
+};`
+                    },
+                    { type: "callout", variant: "info", text: "{id} should be ${id} on Line 6 \n {selectedIds.size} should be ${selectedIds.size} on Line 16" },
+                    { type: "callout", variant: "success", text: "🙌 Congrats, your application is now set up with a mongo backend!" },
                 ]
             }
         ]
@@ -464,6 +702,52 @@ README.md
                     { type: "callout", variant: "success", text: "🙌 Congrats, you have completed creating a docker image and pushing it for your project!" },
                 ]
             },
+            {
+                slug: "docker/useful-commands",
+                title: "Useful Commands",
+                content: [
+                    { type: "paragraph", text: "This page is for any useful Docker commands" },
+                    { type: "heading", text: "Commands" },
+                    { type: "paragraph", text: "1. View Docker Images" },
+                    {
+                        type: "code",
+                        language: "bash",
+                        code: `docker images`
+                    },
+                    { type: "paragraph", text: "2. Remove <none> tagged images" },
+                    {
+                        type: "code",
+                        language: "bash",
+                        code: `docker image prune`
+                    },
+                    { type: "paragraph", text: "3. Remove spefic image" },
+                    {
+                        type: "code",
+                        language: "bash",
+                        code: `docker rmi <image_id_or_name>`
+                    },
+                    { type: "paragraph", text: "4. View all containers" },
+                    {
+                        type: "code",
+                        language: "bash",
+                        code: `docker ps -a`
+                    },
+                    { type: "paragraph", text: "5. Remove specific container" },
+                    {
+                        type: "code",
+                        language: "bash",
+                        code: `docker stop <container_id_or_name>
+docker rm <container_id_or_name>`
+                    },
+                    { type: "paragraph", text: "6. Store Environment Variables" },
+                    {
+                        type: "code",
+                        language: "bash",
+                        code: `export MONGODB_URI="mongodb://localhost:27017"
+echo $MONGODB_URI`
+                    },
+                ]
+            }
         ]
     }
 };
