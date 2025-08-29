@@ -37,7 +37,7 @@ export default function DocsPage() {
                 <p className="text-sm text-gray-400 mb-4 font-headings cursor-default">
                     {sectionTitle} &nbsp;&gt;&nbsp; <span className='font-semibold underline underline-offset-2'>{page.title}</span>
                 </p>
-                <h1 className="text-3xl font-bold mb-6 font-headings">{page.title}</h1>
+                <h3 className="text-3xl font-bold mb-6 font-headings">{page.title}</h3>
                 <ContentRenderer content={page.content} />
 
                 <div className="mt-10 flex justify-between font-headings text-blue-400 cursor-default">
