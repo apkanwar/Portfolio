@@ -2,6 +2,14 @@ import MainCard from "./mainCard";
 
 const projects = [
   {
+    image: "/projects/resumeai.png",
+    title: "Resume Analyzer",
+    description: "An AI-powered web application that allows users to securely upload resumes, automatically parse key sections and run AI-driven analysis to score resumes.",
+    tags: ["Next.js", "GROQ", "Firestore", "Firebase Storage", "Firebase Auth", ],
+    liveLink: "https://resumeanalyzer.me",
+    repoLink: "https://github.com/apkanwar/ResumeAI"
+  },
+  {
     image: "/projects/topjatt.png",
     title: "TopJatt",
     description: "A trading platform to track and visualize stock, crypto, and futures trades while showcasing performance and achievements.",
@@ -46,36 +54,36 @@ const projects = [
     title: "InvestEazy",
     description: "A mock real estate investment platform showcasing clean UI/UX design, where users can explore and fractionally invest in residential and commercial properties.",
     tags: ["NextJS", "TailwindCSS"],
-    liveLink: "",
+    liveLink: "https://www.figma.com/proto/JQZ41k3QsOTC0WoGWTLx07/InvestEazy-Mockup?node-id=2-3&p=f&t=J8xFQ910SS2J3hO7-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=2%3A3&show-proto-sidebar=1",
     repoLink: "https://github.com/apkanwar/InvestEazy"
   }
 ];
 
 export default function ProjectCards() {
-	return (
-		<section id="projectsCard" className="mx-4 xl:mx-auto bg-artic-blue py-24">
-			<div className="mx-auto max-w-5xl flex flex-col">
-				<div className="py-8 w-full flex justify-center items-center bg-dm-black rounded-xl">
-					<p className="font-dText font-semibold text-white text-2xl">
-						PROJECTS OVERVIEW
-					</p>
-				</div>
+  return (
+    <section id="projectsCard" className="mx-4 xl:mx-auto bg-artic-blue py-24">
+      <div className="mx-auto max-w-5xl flex flex-col">
+        <div className="py-8 w-full flex justify-center items-center bg-dm-black rounded-xl">
+          <p className="font-dText font-semibold text-white text-2xl">
+            PROJECTS OVERVIEW
+          </p>
+        </div>
 
-				<div className="grid grid-cols-1 xl:grid-cols-2 mt-12 gap-y-12">
-					{projects.map((project, index) => (
-					  <MainCard
-					    key={index}
-					    image={project.image}
-					    title={project.title}
-					    description={project.description}
-					    tags={project.tags}
-					    liveLink={project.liveLink}
-					    repoLink={project.repoLink}
-					  />
-					))}
-				</div>
+        <div className="grid grid-cols-1 xl:grid-cols-2 mt-12 gap-y-12">
+          {projects.map((project, index) => (
+            <MainCard
+              key={index}
+              image={project.image}
+              title={project.title}
+              description={project.description}
+              tags={project.tags}
+              liveLink={project.liveLink}
+              repoLink={project.repoLink}
+            />
+          ))}
+        </div>
 
-			</div>
-		</section>
-	)
+      </div>
+    </section>
+  )
 }
