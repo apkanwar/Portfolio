@@ -5,7 +5,7 @@ const projects = [
     image: "/projects/resumeai.png",
     title: "Resume Analyzer",
     description: "An AI-powered web application that allows users to securely upload resumes, automatically parse key sections and run AI-driven analysis to score resumes.",
-    tags: ["Next.js", "GROQ", "Firestore", "Firebase Storage", "Firebase Auth", ],
+    tags: ["NextJS", "GROQ", "Firestore", "Firebase Storage", "Firebase Auth", ],
     liveLink: "https://resumeanalyzer.me",
     repoLink: "https://github.com/apkanwar/ResumeAI"
   },
