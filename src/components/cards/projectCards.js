@@ -40,7 +40,7 @@ const projects = [
     page: 1,
   },
   {
-    image: "/projects/finsimpl.png",
+    image: "/projects/bronbeats.png",
     title: "BronBeats",
     description: "BronBeats is a creative web platform where users can listen to LeBron James remix songs. I built it quickly using Next.js, TailwindCSS, and AI-assisted coding, reusing prior design templates and refining them for a unique music experience.",
     tags: ["NextJS", "Firestore", "Firebase Auth"],
@@ -49,10 +49,10 @@ const projects = [
     page: 1,
   },
   {
-    image: "/projects/finsimpl.png",
+    image: "/projects/bmo.png",
     title: "BMO Banking Frontend Clone",
     description: "Leveraged Swift's AI-assisted coding features to accelerate component development, while applying my own design refinements and structural decisions.",
-    tags: ["NextJS", "Firestore", "Firebase Auth"],
+    tags: ["Swift"],
     liveLink: "",
     repoLink: "https://github.com/apkanwar/BMODemo_iOS",
     page: 2,
